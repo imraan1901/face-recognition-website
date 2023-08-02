@@ -1,6 +1,8 @@
 'use client';
 import { useState } from "react";
 import { v4 } from "uuid";
+import imageCompression from 'browser-image-compression';
+
 
 const App = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -18,16 +20,38 @@ const App = () => {
     }
   };
 
+  async function handleImageUpload() {
+  
+    const options = {
+      maxSizeMB: .1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    }
+    try {
+      const compressedFile = await imageCompression(selectedImage, options);
+      console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+      console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+  
+      return compressedFile
+    } catch (error) {
+      console.log(error);
+    }
+  
+  }
+
   async function submitToBackend() {
     setMyText(`Checking...`)
     let filenameQuery = encodeURIComponent(filename)
+
+    const compressedFile = await handleImageUpload()
+
     let url = `https://2p47twxmsj.execute-api.us-west-1.amazonaws.com/dev/auth?filename=${filenameQuery}`
     const backendResponse = await fetch(url, {
       method: "PUT",
       headers: {
         "Content-Type": "image/*",
       },
-      body: selectedImage,
+      body: compressedFile,
     })
     //setName(await backendResponse.json())
     let resp = await backendResponse.json()

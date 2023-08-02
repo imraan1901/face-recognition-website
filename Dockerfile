@@ -29,10 +29,10 @@ COPY --link  . .
 # ENV NEXT_TELEMETRY_DISABLED 1
 
 
-RUN yarn build
+#RUN yarn build
 
 # If using npm comment out above and use below instead
-# RUN npm run build
+RUN npm run build
 
 # Production image, copy all the files and run next
 FROM base AS runner
@@ -56,8 +56,5 @@ COPY --from=builder --link --chown=1001:1001 /app/.next/static ./.next/static
 USER nextjs
 
 EXPOSE 3000
-
-ENV PORT 3000
-ENV HOSTNAME localhost
 
 CMD ["node", "server.js"]
