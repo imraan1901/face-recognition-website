@@ -5,7 +5,8 @@ import imageCompression from 'browser-image-compression';
 
 
 const App = () => {
-  const [selectedImage, setSelectedImage] = useState(null);
+
+  const [selectedImage, setSelectedImage] = useState(null as unknown as File);
   const [filename, setFileName] = useState("");
   const [auth, setAuth] = useState(false);
   const [myText, setMyText] = useState("Click To Check Employee Status");
@@ -19,6 +20,7 @@ const App = () => {
       setFileName(v4())
     }
   };
+
 
   async function handleImageUpload() {
   
@@ -41,9 +43,8 @@ const App = () => {
 
   async function submitToBackend() {
     setMyText(`Checking...`)
+    let compressedFile = await handleImageUpload()
     let filenameQuery = encodeURIComponent(filename)
-
-    const compressedFile = await handleImageUpload()
 
     let url = `https://2p47twxmsj.execute-api.us-west-1.amazonaws.com/dev/auth?filename=${filenameQuery}`
     const backendResponse = await fetch(url, {
@@ -76,7 +77,7 @@ const App = () => {
           a jpg, jpeg, or png file of anyone one of those people to see if they are recognized.
           Also you can upload someone not in this list to see if they are not recognized.</h2>
         <input style={{"alignItems": "center", "justifyContent" : "center" }}
-          accept="image/jpg, image/jpeg, image/png"
+          accept=".jpg,.jpeg,.png"
           type="file"
           onChange={imageChange}
         />
