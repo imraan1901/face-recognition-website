@@ -4,6 +4,6 @@ The purpose of this website is to demonstrate a working architecture for a compa
 
 ## Architecture Diagram
 
-![Architecture Diagram](https://raw.githubusercontent.com/imraan1901/face-recognition-website/main/FaceRecognitionApp.drawio.png)
+![Architecture Diagram](https://raw.githubusercontent.com/imraan1901/face-recognition-website/main/FaceRecognitionApp.png)
 
 
