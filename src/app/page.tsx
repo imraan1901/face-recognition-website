@@ -74,7 +74,7 @@ const App = () => {
           Employee Face Recognition App</h1>
         <h2 style={{"height" : "150px", "width" : "450px", "justifyContent" : "center"}}>I have added Cillian Murphy, Emily Blunt, Robert Downey-Jr., 
           Margot Robbie, Ryan Gosling, and Will Ferrell. Go ahead and find
-          a jpg, jpeg, or png file of anyone one of those people to see if they are recognized.
+          a jpg, jpeg, or png file of any one of those people to see if they are recognized.
           Also you can upload someone not in this list to see if they are not recognized.</h2>
         <input style={{"alignItems": "center", "justifyContent" : "center" }}
           accept=".jpg,.jpeg,.png"
